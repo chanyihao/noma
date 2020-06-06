@@ -450,7 +450,7 @@ import {
 import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
 
 export default {
-  name: "ComplainPlan",
+  name: "ComplainCase",
   components: { Pagination },
   filters: {
     statusFilter(status) {

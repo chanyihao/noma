@@ -116,6 +116,12 @@ export const constantRoutes = [
             meta: { title: '广义投诉' }
           }
         ]
+      },
+      {
+        path: 'complain-case',
+        name: 'ComplainCase',
+        component: () => import('@/views/complain/case/index'),
+        meta: { title: '投诉案例', icon: 'case' }
       }
     ]
   },
