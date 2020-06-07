@@ -8,3 +8,9 @@ npm install --registry=https://registry.npm.taobao.org
 
 # 安装vue-baidu-map
 npm install vue-baidu-map --save
+
+如遇到node-sass 安装失败
+npm i node-sass --sass_binary_site=https://npm.taobao.org/mirrors/node-sass
+
+# 启动本地项目
+npm run dev
