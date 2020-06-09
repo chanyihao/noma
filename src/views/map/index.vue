@@ -543,7 +543,6 @@ export default {
       this.zoom = this.zoom + 1;
     },
     handleSearch() {
-      // console.log(e) // 为选中的value
       if (this.keyword.length < 2) {
         return;
       }
@@ -568,7 +567,7 @@ export default {
     handleShow() {
       this.show_results = true;
     },
-    // 编辑投诉内容
+    // 编辑投诉内容详情
     handleUpdate() {
       this.dialogStatus = "update";
       this.dialogFormVisible = true;
