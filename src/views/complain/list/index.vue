@@ -746,7 +746,7 @@ export default {
         this.$refs["dataForm"].clearValidate();
       });
       this.viewOnMap();
-      this.getCompalins();
+      this.getComplainList();
     },
     // 取消按钮
     closeUpdate() {
