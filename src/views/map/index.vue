@@ -359,7 +359,7 @@ export default {
       fault_points: [], // 加载故障点
       markers: [],
       keyword: "",
-      value: "搜索地图",
+      value: "搜索类型",
       labelStyle: {
         // 标签样式
         padding: "10px",
@@ -403,12 +403,12 @@ export default {
       index: 0,
       options: [
         {
-          value: "map",
-          label: "搜索地图"
-        },
-        {
           value: "cp",
           label: "搜索投诉"
+        },
+        {
+          value: "map",
+          label: "搜索地图"
         },
         {
           value: "site",
