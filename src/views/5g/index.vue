@@ -55,7 +55,7 @@
 // import * as mapv from 'mapv'
 import "@/styles/base.css";
 import "@/styles/infowindow.css";
-import { getComplain } from "@/api/complain.js";
+import { getAllComplain } from "@/api/all-complain.js";
 import { wgs84tobd09 } from "@/utils/transformCoordinate.js";
 
 export default {
@@ -73,10 +73,8 @@ export default {
         limit: 0, // 每页显示数量
         city: "",
         user_tel: "",
-        is_solved: "",
-        is_overtime: "",
-        start_date: "",
-        end_date: "",
+        start_date: "2020-04-01",
+        end_date: "2020-05-31",
         area: ""
       },
       infoWindow: {
@@ -123,7 +121,7 @@ export default {
     handler({ BMap, map }) {
       var mapv = require("mapv");
       this.loading = true;
-      getComplain(this.listQuery)
+      getAllComplain(this.listQuery)
         .then(response => {
           //   console.log(response.data);
           this.complain_points = response.data;

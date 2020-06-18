@@ -324,8 +324,7 @@ import { wgs84tobd09, bd09towgs84 } from "@/utils/transformCoordinate.js";
 import YiEditDialog from "@/components/Yi-Edit-Dialog";
 
 export default {
-  // 考试、活动等保障
-  name: "Event",
+  name: "Map",
   components: { YiEditDialog },
   data() {
     return {
