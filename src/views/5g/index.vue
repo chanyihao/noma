@@ -43,7 +43,14 @@
               <a class="edit-complain" href>更新信息</a>
             </p>
           </bm-info-window>
-        </baidu-map>
+          <!-- 加载投诉海量点 -->
+          <bm-point-collection
+            :points="complain_points"
+            shape="BMAP_POINT_SHAPE_RHOMBUS"
+            color="#00ffff"
+            size="BMAP_POINT_SIZE_NORMAL"
+            @click="clickComplainsHandler"
+          ></bm-point-collection></baidu-map>
       </div>
     </el-col>
   </el-row>
@@ -67,6 +74,7 @@ export default {
       mapType: "BMAP_HYBRID_MAP",
       // mapStyle: { style: "normal" },
       complain_points: [],
+      temp_complains: [], // 临时存储投诉点数据
       listQuery: {
         // 投诉库查询参数
         page: 1,
@@ -173,7 +181,7 @@ export default {
                 console.log(this.infoWindow);
               }
             },
-            maxZoom: 20, // 最大显示级别，超过不显示点聚合
+            maxZoom: 18, // 最大显示级别，超过不显示点聚合
             minZoom: 8, // 最小显示级别
             label: {
               // 聚合文本样式
@@ -191,6 +199,7 @@ export default {
           var mapvLayer = new mapv.baiduMapLayer(map, dataSet, options);
           console.log(mapvLayer);
           this.loading = false;
+          this.getCompalins(); // 同时加载投诉海量点
         })
         .catch(response => {
           this.loading = false;
@@ -200,18 +209,67 @@ export default {
     getCompalins() {
       // this.complain_flag = !this.complain_flag;
       // this.loading = true;
-      getComplain(this.listQuery)
+      getAllComplain(this.listQuery)
         .then(response => {
-          console.log(response.data);
-          this.complain_points = response.data;
-          this.handler();
+          // console.log(response.data);
+          var d = response.data;
+          var len = d.length;
+          var data = [];
+          var point = [];
+          // 构造数据
+          for (var i = 0; i < len; i++) {
+            point = wgs84tobd09(
+              d[i].lng,
+              d[i].lat
+            ); // wgs84坐标系转换为bd09l
+            data.push({
+              geometry: {
+                type: "Point",
+                coordinates: [point[0], point[1]]
+              },
+              lng: point[0],
+              lat: point[1],
+              city: d[i].city,
+              cp_time: d[i].cp_time,
+              cell_name: d[i].cell_name,
+              user_tel: d[i].user_tel,
+              cp_type: d[i].cp_type,
+              workorder: d[i].workorder,
+              index: i // 对应数据数组中的索引
+            });
+          }
+          this.complain_points = data;
           // this.loading = false;
         })
         .catch(response => {
           // this.loading = false;
         });
+    },
+    clickComplainsHandler(e) {
+      // console.log(e.point.index); // 多点击的点对应所在数组的索引
+      // this.cp_edit_data = this.CpAllData[e.point.index];
+      var len = this.complain_points.length;
+      for (var i = 0; i < len; i++) {
+        var data = this.complain_points[i];
+        if (data.lng === e.point.lng && data.lat === e.point.lat) {
+          this.infoWindow = {
+            position: {
+              lng: e.point.lng,
+              lat: e.point.lat
+            },
+            title: data.cell_name,
+            show: true,
+            content: {
+              info1: "投诉时间：" + data.cp_time,
+              info2: "投诉号码：" + data.user_tel,
+              info3: "投诉现象：" + data.cp_type,
+              info4: "是否落单：" + data.workorder
+            }
+          };
+          return;
+        }
+      }
     }
-    // 经纬度转换
   }
 };
 </script>
