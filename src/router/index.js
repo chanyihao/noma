@@ -246,6 +246,12 @@ export const constantRoutes = [
         name: 'demo2',
         component: () => import('@/views/demo/i'),
         meta: { title: '蜂窝效果', icon: 'list' }
+      },
+      {
+        path: 'coord',
+        name: 'coord',
+        component: () => import('@/views/demo/coord'),
+        meta: { title: '坐标转换', icon: 'list' }
       }
     ]
   },
