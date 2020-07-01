@@ -44,8 +44,8 @@
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登陆</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: 111111</span>
+        <span style="margin-right:20px;">测试账号: admin</span>
+        <span> 测试密码: 111111</span>
       </div>
 
     </el-form>
