@@ -40,7 +40,7 @@
               <span class="right">{{ infoWindow.content.info4 }}</span>
             </p>
             <p>
-              <a class="edit-complain" href>更新信息</a>
+              <a class="edit-complain" href>编辑信息</a>
             </p>
           </bm-info-window>
           <!-- 加载投诉海量点 -->
